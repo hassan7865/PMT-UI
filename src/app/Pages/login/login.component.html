@@ -1,0 +1,67 @@
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="cont vh-100 d-none d-sm-block" style="flex: 2.5;"></div>
+    <div class="d-flex justify-content-center align-items-sm-center" style="flex: 2;">
+        <form [formGroup]="UserForm" (ngSubmit)="LoginUser()" class="w-75">
+            <h3>Login to your account</h3>
+
+
+            <div class="form-group mt-5">
+
+                <label class="form-label" for="Email">Email</label>
+                <input type="email" formControlName="email" id="Email" class="form-control" pInputText
+                    [ngClass]="{ 'is-invalid': isFieldInvalid('email') }" />
+
+
+                @if (isFieldInvalid('email')) {
+                <small class="text-danger">
+                    @if(UserForm.get("email").hasError("required")){
+                    <span>Email is required.</span>
+                    }
+                    @else if (UserForm.get("email").hasError("email")) {
+                    <span>Invalid email format.</span>
+                    }
+
+                </small>
+                }
+
+            </div>
+
+
+            <div class="form-group mt-4">
+
+                <label class="form-label" for="Password">Password</label>
+                <input type="password" formControlName="password" class="form-control" id="Password"
+                    [ngClass]="{ 'is-invalid': isFieldInvalid('password') }" />
+
+
+                @if (isFieldInvalid('password')){
+                <small class="text-danger">
+                    @if(UserForm.get("password").hasError("required")){
+                    <span>Password is required.</span>
+                    }
+                </small>
+                }
+
+            </div>
+            @if(error){
+                <small  class="text-danger mb-3">{{error}}</small>
+            }
+          
+           
+            <div class=" mt-4 pt-2">
+                <button [disabled]="UserForm.invalid" type="submit" class="btn btn-primary btn-lg w-100 ">
+                    @if (IsLoading) {
+                        <div class="spinner-border"style="width: 1.8rem; height: 1.8rem;" role="status" role="status"></div>
+                    }
+                    @else{
+                    <span>Login</span>
+                    }
+
+
+                </button>
+               
+            </div>
+        </form>
+
+    </div>
+</div>
