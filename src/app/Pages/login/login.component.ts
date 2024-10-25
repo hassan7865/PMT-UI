@@ -28,18 +28,21 @@ export class LoginComponent implements OnInit {
     })
   }
   LoginUser(){
-    this.IsLoading = true
-    this.userService.UserLogin(this.UserForm.value).subscribe({
-      next:(res)=>{
-        this.IsLoading = false
-        this.CookieService.set("UserAuth",JSON.stringify(res.userAuth))
-        this.router.navigate(["/"])
-      },
-      error:(err)=>{
-        this.IsLoading = false
-        this.error = err.error.message
-      }
-    })
+    if(!this.UserForm.invalid){
+      this.IsLoading = true
+      this.userService.UserLogin(this.UserForm.value).subscribe({
+        next:(res)=>{
+          this.IsLoading = false
+          this.CookieService.set("UserAuth",JSON.stringify(res.userAuth))
+          this.router.navigate(["/"])
+        },
+        error:(err)=>{
+          this.IsLoading = false
+          this.error = err.error.message
+        }
+      })
+    }
+   
   }
 
   isFieldInvalid(field: string) {

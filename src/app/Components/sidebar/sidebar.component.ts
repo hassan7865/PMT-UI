@@ -1,21 +1,22 @@
-import { Component, ViewChild } from '@angular/core';
-import { AvatarModule } from 'primeng/avatar';
-import { ButtonModule } from 'primeng/button';
-import { Sidebar, SidebarModule } from 'primeng/sidebar';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
+import { CommonService } from '../../Services/common.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SidebarModule,ButtonModule,AvatarModule],
+  imports: [MatSidenavModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
-export class SidebarComponent {
-  @ViewChild('sidebarRef') sidebarRef!: Sidebar;
+export class SidebarComponent implements OnInit {
+  @ViewChild('drawer') drawer!: MatDrawer;
+  constructor(private commonService : CommonService){}
 
-  closeCallback(e): void {
-      this.sidebarRef.close(e);
+  ngOnInit() {
+    this.commonService.toggleDrawer$.pipe(takeUntil(this.commonService.onDestroy$)).subscribe(() => {
+      this.drawer.toggle();
+    });
   }
-
-  sidebarVisible: boolean = true;
 }
