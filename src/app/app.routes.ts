@@ -5,6 +5,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { authGuard, loginGuard } from './Guards/auth.guard';
 
 
+
 export const routes: Routes = [
     {path:"login",component:LoginComponent,canActivate:[loginGuard]},
     {
@@ -16,5 +17,5 @@ export const routes: Routes = [
           
         ],
     },
-    
+    { path: '**', redirectTo: 'login' },
 ];

@@ -1,5 +1,44 @@
 .example-container {
-    height: calc(100vh - 60px);
-    background: #eee;
-  }
-  
+  height: calc(100vh - 20px);
+  background: #eee;
+}
+
+.sidebar {
+  width: 320px;
+  height: 100vh;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.sidebar h6 {
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #000;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.sidebar a:hover {
+  background-color: #f0f0f0;
+}
+
+.sidebar a.active {
+  background-color: #e0e7ff;
+  color: #6366f1;
+  border: 1px solid #6366f1;
+}
+
+.sidebar a span {
+  margin-right: 10px; /* Adjust the spacing for the icon */
+}
+
